@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+    apache:
+        container_name: book_store
+        build:
+            context: .
+            dockerfile: apache.dockerfile
+        ports:
+            - "7845:80"
+        restart: unless-stopped
+        volumes:
+            - "./src:/var/www/html"
+        networks:
+            - internal
+    db:
+        container_name: db_book_store
+        image: mariadb:latest
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_ROOT_PASSWORD: ngn@ngn
+            MYSQL_USER: ngn
+            MYSQL_PASSWORD: ngn@ngn
+            MYSQL_DATABASE: book_store
+        restart: unless-stopped
+        volumes:
+            - "./data:/var/lib/mysql"
+        networks:
+            - internal
+    phpmyadmin:
+          image: phpmyadmin/phpmyadmin
+          container_name: pma_bookstore
+          networks:
+              - internal
+          environment:
+              PMA_HOST: db
+              PMA_PORT: 3306
+              PMA_ARBITRARY: 1
+          restart: unless-stopped
+          ports:
+              - "7855:80"
+networks:
+    internal:
+        driver: bridge
