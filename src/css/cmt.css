@@ -61,7 +61,7 @@ body{
 
 .darker{
     background-color: white;
-    float: right;
+    float: left;
     border-radius: 5px;
     padding-left: 40px;
     padding-right: 30px;

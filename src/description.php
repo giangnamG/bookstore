@@ -1,7 +1,7 @@
 <?php
-session_start();
-if(!isset($_SESSION['user']['username']))
-       header("location: index.php?Message=Login To Continue");
+  session_start();
+  if(!isset($_SESSION['user']))
+    header("location: index.php?Message=Login To Continue");
 ?>
 
 <!DOCTYPE html>
@@ -142,8 +142,9 @@ echo '
         }
     echo '</div>';
     ?>
-
+<!-- comment -->
 <?php include('./cmt.php')?>
+
 <div class="container-fluid" id="service">
       <div class="row">
           <div class="col-sm-6 col-md-3 text-center">

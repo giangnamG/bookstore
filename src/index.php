@@ -20,12 +20,12 @@ if(isset($_POST['submit']))
   { 
         $username=$_POST['login_username'];
         $password=$_POST['login_password'];
-        $query = "SELECT * from users where UserName ='$username' AND Password='$password'";
+        $query = "SELECT * from users where username ='$username' AND Password='$password'";
         $result = mysqli_query($conn,$query);
         if(mysqli_num_rows($result) > 0)
         {
              $row = mysqli_fetch_assoc($result);
-             $_SESSION['user']['username']=$row['UserName'];
+             $_SESSION['user']['username']=$row['username'];
              $_SESSION['user']['role'] = $row['role'];
              print'
                 <script type="text/javascript">alert("successfully logged in!!!");</script>
@@ -33,7 +33,7 @@ if(isset($_POST['submit']))
         }
         else
         {    print'
-              <script type="text/javascript">alert("Incorrect Username Or Password!!");</script>
+              <script type="text/javascript">alert("Incorrect username Or Password!!");</script>
                   ';
         }
   }
@@ -41,7 +41,7 @@ if(isset($_POST['submit']))
   {
         $username=$_POST['register_username'];
         $password=$_POST['register_password'];
-        $query="select * from users where UserName = '$username'";
+        $query="select * from users where username = '$username'";
         $result=mysqli_query($conn,$query) or die();
         if(mysqli_num_rows($result)>0)
         {   
@@ -126,8 +126,8 @@ if(isset($_POST['submit']))
                             <div class="modal-body">
                                           <form class="form" role="form" method="post" action="index.php" accept-charset="UTF-8">
                                               <div class="form-group">
-                                                  <label class="sr-only" for="username">Username</label>
-                                                  <input type="text" name="login_username" class="form-control" placeholder="Username" required>
+                                                  <label class="sr-only" for="username">username</label>
+                                                  <input type="text" name="login_username" class="form-control" placeholder="username" required>
                                               </div>
                                               <div class="form-group">
                                                   <label class="sr-only" for="password">Password</label>
@@ -159,8 +159,8 @@ if(isset($_POST['submit']))
                           <div class="modal-body">
                                         <form class="form" role="form" method="post" action="index.php" accept-charset="UTF-8">
                                             <div class="form-group">
-                                                <label class="sr-only" for="username">Username</label>
-                                                <input type="text" name="register_username" class="form-control" placeholder="Username" required>
+                                                <label class="sr-only" for="username">username</label>
+                                                <input type="text" name="register_username" class="form-control" placeholder="username" required>
                                             </div>
                                             <div class="form-group">
                                                 <label class="sr-only" for="password">Password</label>

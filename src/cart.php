@@ -1,9 +1,9 @@
 <?php
 	session_start();
-  if(!isset($_SESSION['user']['username']))
+  if(!isset($_SESSION['user']))
        header("location: index.php?Message=Login To Continue");
 	include "dbconnect.php";
-         $customer=$_SESSION['user'];
+         $customer=$_SESSION['user']['username'];
 ?>
 <?php
 
@@ -202,12 +202,13 @@ echo '<div class="container-fluid" id="cart">
 	                           $result=mysqli_query($conn,$query);
                             }
                     }
-              	$query="SELECT PID,Title,Author,Edition,Quantity,Price,rating FROM cart INNER JOIN products ON cart.Product=products.PID 
-              	        WHERE Customer='$customer'";
+
+            $query="SELECT products.PID,products.Title,products.Author,products.Edition,cart.Quantity,products.Price,products.rating FROM cart INNER JOIN products ON cart.Product=products.PID WHERE cart.Customer='$customer'";
 	        $result=mysqli_query($conn,$query); 
                 $total=0;
                 if(mysqli_num_rows($result)>0)
-                {    $i=1;
+                {   
+                        $i=1;
                      $j=0;
                      while($row = mysqli_fetch_assoc($result))
                      {       $path = "img/books/".$row['PID'].".jpg";

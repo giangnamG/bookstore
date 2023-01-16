@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['user']['username']))
+if(!isset($_SESSION['user']))
        header("location: index.php?Message=Login To Continue");
 ?>
 
